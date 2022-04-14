@@ -1,4 +1,5 @@
 const person = {
+    //object : attribute
     name: 'abi',
     age: 20,
     location: {
@@ -7,7 +8,7 @@ const person = {
     },
     hobby: ['coding', 'reading', 'listening music'],
 }
-console.log(person);
+console.table(person);
 console.log(person.name);
 console.log(person.age);
 console.log(person.location.city);
