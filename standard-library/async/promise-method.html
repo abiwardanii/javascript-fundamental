@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise Method</title>
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <td>ID:</td>
+          <td id="id"></td>
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td id="name"></td>
+        </tr>
+        <tr>
+          <td>Harga:</td>
+          <td id="harga"></td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      function getProduct() {
+        return new Promise(function (resolve, reject) {
+          const ajax = new XMLHttpRequest();
+          ajax.open("GET", "api/product.json");
+          ajax.onload = function () {
+            if (ajax.status === 200) {
+              resolve(ajax.responseText);
+            } else {
+              reject(`terjadi kesalahan status ${ajax.status}`);
+            }
+          };
+          ajax.send();
+        });
+      }
+      getProduct()
+      .then(function (response) {
+        const json = JSON.parse(response);
+        document.getElementById("id").textContent = json.id;
+        document.getElementById("name").textContent = json.name;
+        document.getElementById("harga").textContent = json.harga;
+      })
+      .catch(function (error){
+        document.getElementById("id").textContent = error;
+        document.getElementById("name").textContent = error;
+        document.getElementById("harga").textContent = error;
+      })
+      .finally(function () {
+        console.log("finally, kode ini akan selalu dijalankan");
+      });
+    </script>
+  </body>
+</html>
