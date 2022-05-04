@@ -1,0 +1,7 @@
+function rot13(str) {
+  return str.replace(/[A-Z]/g, function(c) { 
+    return String.fromCharCode(c.charCodeAt() + (/[A-M]/.test(c) ? 13 : -13));
+  });
+}
+
+rot13("SERR PBQR PNZC");
